@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Vyhledávání potraviny</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-item>
+    <ion-input [(ngModel)]="searchTerm" placeholder="Název potraviny"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="searchFood()"><b>Vyhledat</b></ion-button>
+
+  <ion-card *ngIf="foodInfo">
+    <ion-card-header>
+      Informace o potravině
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Název:</strong> {{ foodInfo.name }}</p>
+      <p><strong>Kalorie:</strong> {{ foodInfo.calories }} kcal</p>
+      <p><strong>Bílkoviny:</strong> {{ foodInfo.proteins }} g</p>
+      <p><strong>Sacharidy:</strong> {{ foodInfo.carbs }} g</p>
+      <p><strong>Tuky:</strong> {{ foodInfo.fats }} g</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
