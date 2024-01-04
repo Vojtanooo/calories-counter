@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FoodAPIService } from '../api/food-api.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -9,16 +11,16 @@ export class Tab1Page {
   searchTerm: string = "";
   foodInfo: any; // Objekt pro uchování informací o potravině
 
-  constructor() {}
+  constructor(private apiService: FoodAPIService) {}
 
   searchFood() {
-    // Simulace vyhledávání informací o potravině (můžeš nahradit vlastní logikou/API voláním)
-    this.foodInfo = {
-      name: this.searchTerm,
-      calories: 100,
-      proteins: 10,
-      carbs: 20,
-      fats: 5,
-    };
+    this.apiService.getFood(this.searchTerm).subscribe(
+      (result) => {
+        this.foodInfo = result;
+      },
+      (error) => {
+        console.error('Error:', error);
+    }
+    );
   }
 }
