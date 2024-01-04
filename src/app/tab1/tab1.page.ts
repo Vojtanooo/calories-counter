@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FoodAPIService } from '../api/food-api.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -7,6 +8,7 @@ import { FoodAPIService } from '../api/food-api.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
   searchTerm: string = "";
   foodInfo: any; // Objekt pro uchování informací o potravině
@@ -17,6 +19,7 @@ export class Tab1Page {
     this.apiService.getFood(this.searchTerm).subscribe(
       (result) => {
         this.foodInfo = result;
+        console.log('Food info:', this.foodInfo);
       },
       (error) => {
         console.error('Error:', error);
