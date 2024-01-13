@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FoodAPIService } from '../api/food-api.service';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-tab1',
@@ -11,12 +9,13 @@ import { Observable } from 'rxjs';
 
 export class Tab1Page {
   searchTerm: string = "";
-  foodInfo: any; // Objekt pro uchování informací o potravině
+  weight: number = 0;
+  foodInfo: any[] = [];
 
   constructor(private apiService: FoodAPIService) {}
 
   searchFood() {
-    this.apiService.getFood(this.searchTerm).subscribe(
+    this.apiService.getFood(`${this.weight}g ${this.searchTerm}`).subscribe(
       (result) => {
         this.foodInfo = result;
         console.log('Food info:', this.foodInfo);
