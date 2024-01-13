@@ -9,7 +9,7 @@ import { FoodAPIService } from '../api/food-api.service';
 
 export class Tab1Page {
   searchTerm: string = "";
-  weight: number = 0;
+  weight?: number;
   foodInfo: any[] = [];
 
   constructor(private apiService: FoodAPIService) {}
@@ -22,7 +22,17 @@ export class Tab1Page {
       },
       (error) => {
         console.error('Error:', error);
-    }
+      }
     );
+  }
+
+  saveFood(food: any) {
+    console.log('Saving food:', food);
+    // Implementujte kód pro uložení dat o jídle dle potřeby
+
+    // Po uložení refreshnout stránku
+    setTimeout(() => {
+      location.reload();
+    }, 1000); // Počkejte 1 sekundu (1000 ms) a pak refreshněte stránku
   }
 }

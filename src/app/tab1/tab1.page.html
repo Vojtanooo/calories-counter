@@ -1,33 +1,41 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Vyhledávání potraviny</ion-title>
+      <ion-title size="large">Food search</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
-    <ion-input [(ngModel)]="searchTerm" placeholder="Název potraviny"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-input [(ngModel)]="weight" type="number" placeholder="Váha v gramech"></ion-input>
-  </ion-item>
-
-  <ion-button expand="block" (click)="searchFood()"><b>Vyhledat</b></ion-button>
-
-
-  <ion-card *ngFor="let food of foodInfo">
-    <ion-card-header>
-      Informace o potravině
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>Search for food</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Název:</strong> {{ food.name }}</p>
-      <p><strong>Velikost porce:</strong> {{ food.serving_size_g }} g</p>
-      <p><strong>Kalorie:</strong> {{ food.calories }} kcal</p>
-      <p><strong>Bílkoviny:</strong> {{ food.protein_g }} g</p>
-      <p><strong>Sacharidy:</strong> {{ food.carbohydrates_total_g }} g</p>
-      <p><strong>Tuky (celkem):</strong> {{ food.fat_total_g }} g</p>
+      <ion-item lines="none">
+        <ion-input label="Food name" labelPlacement="floating" [(ngModel)]="searchTerm" placeholder="Enter text"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input label="Weight in grams" labelPlacement="floating" [(ngModel)]="weight" type="number" placeholder="Enter number"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="searchFood()"><b>Find</b></ion-button>
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngFor="let food of foodInfo">
+    <ion-card-header color="primary">
+      <ion-card-title>Food information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item><strong>Name:</strong>{{food.name}}</ion-item>
+        <ion-item><strong>Portion size: </strong>{{ food.serving_size_g }} g</ion-item>
+        <ion-item><strong>Calories: </strong>{{ food.calories }} kcal</ion-item>
+        <ion-item><strong>Proteins: </strong>{{ food.protein_g }} g</ion-item>
+        <ion-item><strong>Carbohydrate: </strong>{{ food.carbohydrates_total_g }} g</ion-item>
+        <ion-item><strong>Fats (total): </strong>{{ food.fat_total_g }} g</ion-item>
+      </ion-list>
+      <ion-button id="save" expand="block" color="primary" (click)="saveFood(food)"><b>Save</b></ion-button>
+      <ion-loading trigger="save" message="Food SAVED!" duration="1000"></ion-loading>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
