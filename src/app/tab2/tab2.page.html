@@ -5,5 +5,9 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card *ngFor="let history of storedData">
+    {{ history }}
+  </ion-card>
+
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
