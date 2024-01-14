@@ -7,15 +7,16 @@ import { HistoryServiceService } from '../storage/history-service.service';
   styleUrls: ['tab2.page.scss']
 })
 
-
 export class Tab2Page {
 
+  displayData: Array<string> = [];
   storedData: Array<string> = [];
   totalCalories: number = 0;
   totalProtein: number = 0;
   totalCarbohydrates: number = 0;
   totalFats: number = 0;
   lastUpdatedDate: Date | null = null;
+  lastStoredDataLength: number = 0;
 
   constructor(private storage: HistoryServiceService) {}
 
@@ -45,21 +46,22 @@ export class Tab2Page {
   async ionViewDidEnter() {
     const currentDate = new Date();
     
-    if (!this.lastUpdatedDate || !this.areDatesEqual(currentDate, this.lastUpdatedDate)) {
+    const storedData = await this.storage.get('history');
+    if (storedData && (storedData.length !== this.lastStoredDataLength || !this.lastUpdatedDate || !this.areDatesEqual(currentDate, this.lastUpdatedDate))) {
       this.totalProtein = 0;
       this.totalCalories = 0;
       this.totalCarbohydrates = 0;
       this.totalFats = 0;
-    }
 
-    const storedData = await this.storage.get('history');
-    if (storedData) {
       this.storedData = storedData;
       console.log('Stored data:', storedData);
       
       storedData.forEach((historyString: any) => {
         this.splitHistoryString(historyString);
       });
+
+      this.lastStoredDataLength = storedData.length;
+      this.displayData = [...this.storedData].reverse();
     }
   };
 
