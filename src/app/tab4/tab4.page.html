@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">BMR calculator</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>Calculate</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-input label="Weight (kg)" labelPlacement="floating" [(ngModel)]="weight" type="number" placeholder="Enter your weight"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input label="Height (cm)" labelPlacement="floating" [(ngModel)]="height" type="number" placeholder="Enter your height"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input label="Age" labelPlacement="floating" [(ngModel)]="age" type="number" placeholder="Enter your age"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Gender</ion-label>
+        <ion-select [(ngModel)]="gender">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" (click)="calculateCalories()"><b>Calculate calories intake</b></ion-button>
+
+      <ion-item *ngIf="caloriesResult">
+        <ion-label>Maintenance calories for sedentary work:</ion-label>
+        <ion-text>{{ caloriesResult.toFixed(2) }}</ion-text>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
