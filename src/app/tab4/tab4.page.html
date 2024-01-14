@@ -24,8 +24,17 @@
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label>Gender</ion-label>
-        <ion-select [(ngModel)]="gender">
+        <ion-select label="Activity Level" interface="action-sheet" [(ngModel)]="activityLevel" required>
+          <ion-select-option value="sedentary">Sedentary (little or no exercise)</ion-select-option>
+          <ion-select-option value="lightlyActive">Lightly Active (light exercise/sports 1-3 days/week)</ion-select-option>
+          <ion-select-option value="moderatelyActive">Moderately Active (moderate exercise/sports 3-5 days/week)</ion-select-option>
+          <ion-select-option value="veryActive">Very Active (hard exercise/sports 6-7 days a week)</ion-select-option>
+          <ion-select-option value="extraActive">Extra Active (very hard exercise/sports & physical job or 2x training)</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-select label="Gender" interface="action-sheet" [(ngModel)]="gender">
           <ion-select-option value="male">Male</ion-select-option>
           <ion-select-option value="female">Female</ion-select-option>
         </ion-select>
@@ -33,9 +42,9 @@
 
       <ion-button expand="block" color="primary" (click)="calculateCalories()"><b>Calculate calories intake</b></ion-button>
 
-      <ion-item *ngIf="caloriesResult">
-        <ion-label>Maintenance calories for sedentary work:</ion-label>
-        <ion-text>{{ caloriesResult.toFixed(2) }}</ion-text>
+      <ion-item *ngIf="caloriesResult" lines="none">
+        <ion-label>Calories:</ion-label>
+        <ion-text><b>{{ caloriesResult.toFixed(2) }}</b></ion-text>
       </ion-item>
 
     </ion-card-content>
