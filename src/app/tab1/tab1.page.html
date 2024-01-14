@@ -34,7 +34,7 @@
         <ion-item><strong>Carbohydrate: </strong>{{ food.carbohydrates_total_g }} g</ion-item>
         <ion-item><strong>Fats (total): </strong>{{ food.fat_total_g }} g</ion-item>
       </ion-list>
-      <ion-button id="save" expand="block" color="primary" (click)="saveFood(food)"><b>Save</b></ion-button>
+      <ion-button id="save" expand="block" color="primary" (click)="saveFood('Name: '+food.name+', Protein: '+food.protein_g +'g'+ ', Calories: '+food.calories+', Carbohydrates: '+food.carbohydrates_total_g+'g'+', Fats: '+food.fat_total_g+'g'+', Serving size: '+food.serving_size_g+'g')"><b>Save</b></ion-button>
       <ion-loading trigger="save" message="Food SAVED!" duration="500"></ion-loading>
     </ion-card-content>
   </ion-card>

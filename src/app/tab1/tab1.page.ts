@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FoodAPIService } from '../api/food-api.service';
 import { HistoryServiceService } from '../storage/history-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -11,14 +12,14 @@ import { HistoryServiceService } from '../storage/history-service.service';
 export class Tab1Page {
   searchTerm: string = "";
   weight?: number;
+  translationOutput$: Observable<any> = this.apiService.getFood("")
   foodInfo: any[] = [];
-  historyArray: any[] = [];
-
+  historyArray: Array<string> = []
 
   constructor(
     private apiService: FoodAPIService,
     private storage: HistoryServiceService) {}
-
+      
   searchFood() {
     this.apiService.getFood(`${this.weight}g ${this.searchTerm}`).subscribe(
       (result) => {
@@ -32,9 +33,10 @@ export class Tab1Page {
   }
 
   saveFood(food: any) {
+    this.historyArray.push(food);
     console.log('Saving food:', food);
-    this.storage.set('history', food);
-    console.log('Saving food2:', this.storage.get('history'));
+    this.storage.set('history', this.historyArray);
+
     // Po uložení refreshnout stránku
     setTimeout(() => {
       //location.reload();

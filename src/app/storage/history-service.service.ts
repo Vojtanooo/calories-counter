@@ -18,11 +18,12 @@ export class HistoryServiceService {
     this._storage = storage;
   }
 
-  async set(key: string, value: any) {
-    this._storage?.set(key, value);
+  set(key: string, value: any) {
+    console.log('set mehtod was called')
+    this._storage?.set(key, value)
   }
 
-  async get(key: string) {
-    return this._storage?.get(key);
+  async get(key: string){
+    return this._storage?.get(key)
   }
 }
